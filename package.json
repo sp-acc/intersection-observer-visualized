@@ -1,0 +1,48 @@
+{
+  "name": "observer-visualized",
+  "version": "0.1.0",
+  "description": "Color-coded visual debug layer for IntersectionObserver configuration",
+  "keywords": [
+    "intersectionobserver",
+    "intersection-observer",
+    "debug",
+    "devtools",
+    "visualization",
+    "rootmargin",
+    "threshold"
+  ],
+  "license": "MIT",
+  "type": "module",
+  "main": "./dist/index.cjs",
+  "module": "./dist/index.js",
+  "types": "./dist/index.d.ts",
+  "exports": {
+    ".": {
+      "types": "./dist/index.d.ts",
+      "import": "./dist/index.js",
+      "require": "./dist/index.cjs"
+    },
+    "./noop": {
+      "types": "./dist/noop.d.ts",
+      "import": "./dist/noop.js",
+      "require": "./dist/noop.cjs"
+    }
+  },
+  "files": [
+    "dist"
+  ],
+  "sideEffects": false,
+  "scripts": {
+    "dev": "vite",
+    "build": "tsc -p tsconfig.json && vite build && tsc -p tsconfig.build.json",
+    "build:demo": "vite build --config vite.demo.config.ts",
+    "preview": "vite preview --config vite.demo.config.ts",
+    "test": "vitest run"
+  },
+  "devDependencies": {
+    "jsdom": "^29.1.1",
+    "typescript": "^5.5.0",
+    "vite": "^8.1.4",
+    "vitest": "^4.1.10"
+  }
+}
