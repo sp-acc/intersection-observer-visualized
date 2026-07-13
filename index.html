@@ -1,0 +1,82 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>observer-visualized demo</title>
+    <link rel="stylesheet" href="/src/demo/style.css" />
+  </head>
+  <body>
+    <header class="controls">
+      <strong>observer-visualized</strong>
+      <label>
+        rootMargin
+        <input id="root-margin" type="text" value="-20% 0px" />
+      </label>
+      <label>
+        threshold (comma-separated)
+        <input id="threshold" type="text" value="0, 0.25, 0.5, 0.75, 1" />
+      </label>
+      <button id="apply">Apply to card A</button>
+      <label class="toggle">
+        <input id="debug-toggle" type="checkbox" checked />
+        debug overlays
+      </label>
+    </header>
+
+    <main>
+      <section class="intro">
+        <h1>IntersectionObserver, visualized</h1>
+        <p>
+          Scroll down. The <span class="swatch moss"></span> moss band is the
+          <code>rootMargin</code> zone, the dashed moss line is the effective
+          intersection boundary, the <span class="swatch bark"></span> bark
+          outline is the root, and the <span class="swatch terracotta"></span>
+          terracotta fill is the live intersection rect. The sage badge on each
+          card shows the live ratio and configured thresholds; the panel
+          bottom-right logs real callback firings.
+        </p>
+      </section>
+
+      <div class="spacer">scroll ↓</div>
+
+      <div id="card-a" class="card" data-io-label="card-a">
+        <h2>Card A</h2>
+        <p>rootMargin <code id="card-a-config">-20% 0px</code>, five thresholds. Tweak it in the top bar.</p>
+      </div>
+
+      <div class="spacer">
+        <p>
+          Card B below uses <code>createObserver</code> <strong>without</strong> the debug flag —
+          it behaves like a plain IntersectionObserver (no overlay), until you force
+          <code>window.__IO_DEBUG__ = true</code> in the console.
+        </p>
+      </div>
+
+      <div id="card-b" class="card" data-io-label="card-b">
+        <h2>Card B (undebugged)</h2>
+        <p>Still toggles its style via the real callback.</p>
+      </div>
+
+      <div class="spacer">
+        <p>
+          Card C sits inside a nested scroller used as a custom <code>root</code> —
+          the bark outline hugs the scroller, not the viewport. Scroll <em>inside</em> the box.
+        </p>
+      </div>
+
+      <div id="scroller" class="scroller">
+        <div class="scroller-spacer">scroll inside ↓</div>
+        <div id="card-c" class="card" data-io-label="card-c">
+          <h2>Card C (custom root)</h2>
+          <p><code>root: #scroller</code>, threshold 0.5.</p>
+        </div>
+        <div class="scroller-spacer">↑</div>
+      </div>
+
+      <div class="spacer">the end</div>
+    </main>
+
+    <script type="module" src="/src/demo/main.ts"></script>
+  </body>
+</html>
